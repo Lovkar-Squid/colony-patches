@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.1.0]
+
+### Fixed
+- **Building modules numbered the same on the server and its players.** MineColonies numbers its
+  building modules in the order the mods load, and a dedicated server (no client-only mods) could
+  load them in another order than its players. Then the windows of some addon buildings did not
+  sync, settings could reach the wrong module, and the town hall's statistics page crashed. All
+  building modules are now numbered by name once loading is complete, the same on both sides.
+
+### Changed
+- Colony Patches is now needed on the server **and** on every client. It registers a required
+  network payload, so a half-installed setup is refused at login with the missing mod named,
+  instead of breaking colony windows.
+
 ## [1.0.0]
 
 ### Fixed

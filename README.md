@@ -43,6 +43,34 @@ Delights no longer has: farmers harvest its one-block corn as an ordinary crop
 Reported upstream:
 [MineColonies_Compatibility#203](https://github.com/gisellevonbingen-Minecraft/MineColonies_Compatibility/issues/203).
 
+### The same building-module numbers on the server and its players
+
+**Mods:** MineColonies with addons that bring their own buildings, played on a dedicated server.
+
+**What went wrong:** MineColonies numbers its building modules with a counter, in the order the
+mods create them, and the server and its players talk about modules by those numbers: the building
+windows are synced with them, and settings, hiring and item lists are sent back with them. That
+order follows the order NeoForge loads the mods in, and NeoForge fixes it only where mods depend on
+each other; for the rest it follows a hash map whose order changes with the set of installed mods.
+A dedicated server has no client-only mods (no Sodium, no Iris...), so it can number the modules
+differently from its players. In *Lovkar's MineColonies Ultimate* 1.6.16 the server loaded Runesmith
+before Voyager and Colonies at War, the players after them: 22 modules had other numbers, the windows
+of those buildings never synced, settings could reach the wrong module, and opening the town hall's
+statistics page crashed the game (`NullPointerException` on `WorkerBuildingModuleView.getJobDisplayName`,
+with `Problem during sync: Client side does not have matching module views` in the log before it).
+
+**The fix:** once every mod has loaded, Colony Patches numbers all building modules again by their
+names, which are the same everywhere. The numbers are never saved (a building stores its modules by
+name), so worlds are not touched. Both sides have to do it: Colony Patches registers a required
+network payload, so a player without it cannot join a server with it (and the other way round), with
+NeoForge naming the missing mod instead of colony windows breaking silently. The log shows the
+module set's fingerprint, which must be the same on the server and its players:
+
+```
+[Colony Patches]: Numbered 244 MineColonies building modules by name (244 changed their number);
+module set b5973defa99b - the same on the server and its players
+```
+
 ## How it was tested
 
 On a dedicated server with the server-side mods of *Lovkar's MineColonies Ultimate*: a colony with
@@ -55,8 +83,9 @@ a farmer and a field of 24 ripe plants (`tools/harness`).
 
 ## Install
 
-Drop the jar into `mods/` on the server and on the clients (single player runs a server too).
-It does nothing in a game without the mods it patches.
+Drop the jar into `mods/` **on the server and on every client** (single player runs a server too).
+The corn fix does nothing in a game without the mods it patches; the module numbering does nothing
+without MineColonies.
 
 ## Building
 
