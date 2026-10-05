@@ -50,7 +50,7 @@ a farmer and a field of 24 ripe plants (`tools/harness`).
 
 | Field | Without Colony Patches | With Colony Patches |
 | --- | --- | --- |
-| Ripe corn | the server crashes as soon as the farmer looks at the field | all 24 harvested (44-46 cobs), replanted, no corn blocks left hanging |
+| Ripe corn | the server crashes as soon as the farmer looks at the field | all 24 harvested (44-51 cobs), replanted, no corn blocks left hanging |
 | Ripe eggplants, cucumbers, beans | all harvested | all harvested |
 
 ## Install
