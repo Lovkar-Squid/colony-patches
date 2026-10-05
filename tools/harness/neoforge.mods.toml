@@ -1,0 +1,23 @@
+modLoader="javafml"
+loaderVersion="[4,)"
+license="MIT"
+
+[[mods]]
+modId="corntest"
+version="0.1.0"
+displayName="Corn crash test"
+description="Headless check of a MineColonies farmer working Cultural Delights crops with the MineColonies Compatibility addon loaded."
+
+[[dependencies.corntest]]
+modId="minecolonies"
+type="required"
+versionRange="*"
+ordering="AFTER"
+side="SERVER"
+
+[[dependencies.corntest]]
+modId="minecolonies_compatibility"
+type="required"
+versionRange="*"
+ordering="AFTER"
+side="SERVER"

@@ -1,0 +1,13 @@
+# compiled output and scratch
+build/
+out/
+*.jar
+*.zip
+*.args
+*.log
+
+# third-party jars and decompiled sources - NEVER commit (their licenses do not allow redistribution)
+libs/
+compat-libs/
+decomp/
+stubs/

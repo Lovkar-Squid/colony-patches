@@ -1,0 +1,67 @@
+# Colony Patches
+
+*Small compatibility fixes for MineColonies modpacks.*
+
+Big MineColonies packs put many addons next to each other, and now and then an update on one side
+breaks something on the other. Colony Patches carries small, targeted fixes for those cases until
+the mods involved fix them themselves. Each fix only acts when the broken combination is actually
+loaded; with anything else the mod does nothing.
+
+Made by **Lovkar & Claude** for NeoForge 1.21.1. It needs no other mod and adds no blocks, items or
+settings, so it is safe to add to a world and to remove again.
+
+## The fixes
+
+### Farmers and Cultural Delights corn
+
+**Mods:** [Compatibility addon for MineColonies](https://www.curseforge.com/minecraft/mc-mods/minecolonies-compatibility)
+3.57 with [Cultural Delights](https://www.curseforge.com/minecraft/mc-mods/cultural-delights) 0.18 or later.
+
+**What went wrong:** a farmer working a field with Cultural Delights corn crashed the server
+("Ticking entity", `NoClassDefFoundError: com/baisylia/culturaldelights/block/custom/CornUpperBlock`).
+The Compatibility addon harvests corn as the two-block plant it was up to Cultural Delights 0.17: a
+`CornBlock` with a `CornUpperBlock` on top. Cultural Delights 0.18 rebuilt corn as one `CornBlock`
+with a `height` property, up to three blocks tall, and removed `CornUpperBlock`. MineColonies' worker
+AI catches exceptions but not errors, so the missing class takes the whole server down.
+
+**The fix:** the new corn is an ordinary crop for MineColonies: the bottom block at full age is the
+harvest and drops the corn cobs. Colony Patches stops the addon's corn handler from asking for a
+special harvest position when that handler still needs `CornUpperBlock` and the class is gone, and
+MineColonies' own crop handling takes over. Farmers harvest ripe corn, the upper blocks go with the
+bottom one, and they plant corn kernels again as usual. Eggplants, cucumbers and beans never went
+through the broken code.
+
+The fix checks the actual classes rather than version numbers: with the old two-block corn, or with
+a future Compatibility addon whose corn handler no longer needs `CornUpperBlock`, it stays out of the
+way. The log says which case applies the first time a farmer looks at corn:
+
+```
+[Colony Patches]: MineColonies Compatibility's corn handler needs CornUpperBlock, which this Cultural
+Delights no longer has: farmers harvest its one-block corn as an ordinary crop
+```
+
+Reported upstream:
+[MineColonies_Compatibility#203](https://github.com/gisellevonbingen-Minecraft/MineColonies_Compatibility/issues/203).
+
+## How it was tested
+
+On a dedicated server with the server-side mods of *Lovkar's MineColonies Ultimate*: a colony with
+a farmer and a field of 24 ripe plants (`tools/harness`).
+
+| Field | Without Colony Patches | With Colony Patches |
+| --- | --- | --- |
+| Ripe corn | the server crashes as soon as the farmer looks at the field | all 24 harvested (44-46 cobs), replanted, no corn blocks left hanging |
+| Ripe eggplants, cucumbers, beans | all harvested | all harvested |
+
+## Install
+
+Drop the jar into `mods/` on the server and on the clients (single player runs a server too).
+It does nothing in a game without the mods it patches.
+
+## Building
+
+See [BUILDING.md](BUILDING.md).
+
+## License
+
+GPL-3.0-or-later; see [LICENSE](LICENSE).

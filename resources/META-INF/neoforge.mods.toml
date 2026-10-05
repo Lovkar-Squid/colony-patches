@@ -1,0 +1,32 @@
+modLoader="javafml"
+loaderVersion="[4,)"
+license="GPL-3.0-or-later"
+issueTrackerURL="https://github.com/Lovkar-Squid/colony-patches/issues"
+
+[[mods]]
+modId="colony_patches"
+version="1.0.0"
+displayName="Colony Patches"
+authors="Lovkar & Claude"
+displayURL="https://github.com/Lovkar-Squid/colony-patches"
+logoFile="colony_patches.png"
+description='''Small compatibility fixes for MineColonies modpacks. Each fix only acts when the broken combination of mods is loaded.
+
+- Cultural Delights corn: with MineColonies Compatibility 3.57 and Cultural Delights 0.18, a farmer working a field of corn crashed the server. Farmers now harvest the corn as an ordinary crop.'''
+
+[[mixins]]
+config="colony_patches.mixins.json"
+
+[[dependencies.colony_patches]]
+modId="neoforge"
+type="required"
+versionRange="[21.1.0,)"
+ordering="NONE"
+side="BOTH"
+
+[[dependencies.colony_patches]]
+modId="minecraft"
+type="required"
+versionRange="[1.21.1,1.21.2)"
+ordering="NONE"
+side="BOTH"
