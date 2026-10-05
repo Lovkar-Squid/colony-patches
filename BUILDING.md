@@ -13,7 +13,8 @@ mappings step, because NeoForge 1.21.1 mods run on the official Mojang names.
   the Mixin jar, MineColonies with Structurize, BlockUI and Domum Ornamentum, and the libraries
   Minecraft links against (DataFixerUpper, fastutil, Guava, Gson, SLF4J and so on).
 - **A `compat-libs/` folder** (default `../../compat-libs`, or `COLONYPATCHES_COMPAT`) with the jars
-  of the mods the fixes are written against: the Compatibility addon for MineColonies.
+  of the mods the fixes are written against (the Compatibility addon for MineColonies) and ASM
+  (`asm` and `asm-tree`, as NeoForge ships them in `libraries/org/ow2/asm`) for the mixin plugin.
 - **`stubsrc/`.** Two tiny stand-ins for `net.neoforged.api.distmarker.Dist` and `OnlyIn`, which none
   of those jars carry. They go on the compile classpath only, never into the mod jar.
 

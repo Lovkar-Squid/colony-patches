@@ -2,6 +2,7 @@
   "required": false,
   "minVersion": "0.8",
   "package": "me.lovkar.colonypatches.mixin",
+  "plugin": "me.lovkar.colonypatches.ColonyPatchesMixinPlugin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
     "compat.CornCropMixin"
