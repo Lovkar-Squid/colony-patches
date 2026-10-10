@@ -7,8 +7,9 @@ breaks something on the other. Colony Patches carries small, targeted fixes for 
 the mods involved fix them themselves. Each fix only acts when the broken combination is actually
 loaded; with anything else the mod does nothing.
 
-Made by **Lovkar & Claude** for NeoForge 1.21.1. It needs no other mod and adds no blocks, items or
-settings, so it is safe to add to a world and to remove again.
+Made by **Lovkar & Claude** for NeoForge 1.21.1. It needs no other mod and adds no blocks or items,
+so it is safe to add to a world and to remove again. Its one setting, several colonies per player, is
+off until a server owner turns it on.
 
 ## The fixes
 
@@ -70,6 +71,27 @@ module set's fingerprint, which must be the same on the server and its players:
 [Colony Patches]: Numbered 244 MineColonies building modules by name (244 changed their number);
 module set b5973defa99b - the same on the server and its players
 ```
+
+## Option: several colonies per player
+
+MineColonies lets a player own one colony. Placing a second Town Hall only offers to delete or
+abandon the first, and its own `allowinfinitecolonies` setting does not change that (it only adds the
+abandon button). With Colony Patches, a server owner can allow it in
+`config/colony_patches-server.toml`:
+
+```toml
+[colonies]
+	severalColoniesPerPlayer = true
+```
+
+Then a new Town Hall founds another colony, owned by the same player, next to the ones they have.
+Every colony keeps its own citizens, buildings and permissions. Where MineColonies asks for *the*
+colony of a player - `/minecolonies home`, colony commands without a colony id, a flag placed
+outside any colony - it takes one of them. Off by default.
+
+Tested headless: one player confirms the founding of three Town Halls 400 blocks apart. With the
+setting off (or with Colony Patches 1.1.0) only the first becomes a colony; with it on, all three do,
+each owned by that player.
 
 ## How it was tested
 

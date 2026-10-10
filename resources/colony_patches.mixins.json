@@ -5,7 +5,9 @@
   "plugin": "me.lovkar.colonypatches.ColonyPatchesMixinPlugin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
-    "compat.CornCropMixin"
+    "compat.CornCropMixin",
+    "minecolonies.CreateColonyMessageMixin",
+    "minecolonies.GetColonyInfoMessageMixin"
   ],
   "injectors": {
     "defaultRequire": 0

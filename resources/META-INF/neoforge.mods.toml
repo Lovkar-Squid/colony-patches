@@ -5,7 +5,7 @@ issueTrackerURL="https://github.com/Lovkar-Squid/colony-patches/issues"
 
 [[mods]]
 modId="colony_patches"
-version="1.1.0"
+version="1.2.0"
 displayName="Colony Patches"
 authors="Lovkar & Claude"
 displayURL="https://github.com/Lovkar-Squid/colony-patches"
@@ -13,7 +13,8 @@ logoFile="colony_patches.png"
 description='''Small compatibility fixes for MineColonies modpacks. Each fix only acts when the broken combination of mods is loaded.
 
 - Cultural Delights corn: with MineColonies Compatibility 3.57 and Cultural Delights 0.18, a farmer working a field of corn crashed the server. Farmers now harvest the corn as an ordinary crop.
-- Building modules numbered the same on the server and its players: on a dedicated server, the windows of some addon buildings did not sync and the town hall's statistics page crashed. Needed on the server and on every client.'''
+- Building modules numbered the same on the server and its players: on a dedicated server, the windows of some addon buildings did not sync and the town hall's statistics page crashed. Needed on the server and on every client.
+- Several colonies per player (off by default): severalColoniesPerPlayer in config/colony_patches-server.toml lets a player found a new colony while owning one.'''
 
 [[mixins]]
 config="colony_patches.mixins.json"

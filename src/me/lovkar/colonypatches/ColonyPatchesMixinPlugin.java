@@ -16,7 +16,9 @@ import java.util.Set;
 public final class ColonyPatchesMixinPlugin implements IMixinConfigPlugin {
     /** Mixin (relative to this package) -> the mod ids it needs. */
     private static final Map<String, List<String>> NEEDS = Map.of(
-            "compat.CornCropMixin", List.of("minecolonies_compatibility", "culturaldelights"));
+            "compat.CornCropMixin", List.of("minecolonies_compatibility", "culturaldelights"),
+            "minecolonies.GetColonyInfoMessageMixin", List.of("minecolonies"),
+            "minecolonies.CreateColonyMessageMixin", List.of("minecolonies"));
 
     @Override
     public boolean shouldApplyMixin(final String targetClassName, final String mixinClassName) {
